@@ -1,0 +1,207 @@
+from bs4 import BeautifulSoup
+import tkinter as tk
+import os
+import json
+import csv
+from datetime import datetime
+
+
+def extract_schedule_data(html_file_name):
+    # Read HTML content from a file
+    with open(html_file_name, 'r') as html_file:
+        html = html_file.read()
+
+    # Remove extra whitespace and newline characters
+    html = html.replace('\n', '').replace('  ', '')
+
+    soup = BeautifulSoup(html, 'html.parser')
+
+    # Find the title
+    title_element = soup.find('td', class_='PAGROUPDIVIDER')
+    title = title_element.get_text()
+
+    # Find all <td> tags with class "PSLEVEL2GRIDODDROW" and "PSLEVEL2GRIDEVENROW"
+    schedule_rows = soup.find_all(
+        'td', class_=['PSLEVEL2GRIDODDROW', 'PSLEVEL2GRIDEVENROW'])
+
+    # Lists to store extracted information
+    schedule_data = []
+    data = {}  # Store data for the current entry
+
+    for row in schedule_rows:
+        # Find <div> with id "win0divMTG_SCHED$.." to get Days & Time
+        days_times_div = row.find(
+            'div', id=lambda x: x and x.startswith('win0divMTG_SCHED$'))
+        days_times = days_times_div.get_text() if days_times_div else ""
+
+        # Split "Days & Time" into separate fields for "Days" and "Time"
+        days, time = days_times.split(maxsplit=1) if days_times else ("", "")
+
+        # Remove first two characters from "Days" and "Time"
+        if len(days) > 2:
+            days = days[2:]
+        if len(time) > 2:
+            time = time[2:]
+
+        # Find <div> with id "win0divMTG_LOC$.." to get Room
+        room_div = row.find(
+            'div', id=lambda x: x and x.startswith('win0divMTG_LOC$'))
+        room = room_div.get_text() if room_div else ""
+
+        # Find <div> with id "win0divMTG_DATES$.." to get Start / End Dates
+        dates_div = row.find(
+            'div', id=lambda x: x and x.startswith('win0divMTG_DATES$'))
+        start_end_dates = dates_div.get_text() if dates_div else ""
+        start_end_dates = start_end_dates.split(
+            '-')[0].strip()  # Keep only the start date
+
+        # If the title is not empty, store it in data
+        if title:
+            data["Subject"] = title
+
+        if start_end_dates:
+            data["Start Date"] = start_end_dates
+        # Store other data if any field is non-empty
+        if days:
+            data["Start Time"] = days
+        if time:
+            data["End Time"] = time
+        if room:
+            data["Location"] = room
+
+        # If all fields are filled, add the entry to the schedule_data list and reset data
+        if "Subject" in data and all(field in data for field in ["Start Date", "Start Time", "End Time", "Location"]):
+            schedule_data.append(data)
+            data = {}  # Reset data for the next entry
+
+    # Write the data to a JSON file if there's any data
+    if schedule_data:
+        output_file_name = html_file_name.replace(
+            '.html', '_schedule_data.json')
+        with open(output_file_name, 'w') as json_file:
+            json.dump(schedule_data, json_file, indent=4)
+        print(f"Data has been saved to {output_file_name}")
+    else:
+        print("No data to save.")
+
+
+def searchforsubject(div_id_to_extract):
+    target_div = soup.find('div', id=div_id_to_extract)
+
+    if target_div:
+        # Extract all content under the <div> element
+        extracted_content = target_div.encode_contents().decode('utf-8')
+
+        # Create a folder if it doesn't exist
+        folder_name = 'extracted_html'
+        os.makedirs(folder_name, exist_ok=True)
+
+        # Create a new HTML file and write the extracted content
+        with open(os.path.join(folder_name, div_id_to_extract + '.html'), 'w') as f:
+            # Write a basic HTML structure
+            f.write(
+                "<!DOCTYPE html>\n<html>\n<head><title>Extracted Content</title></head>\n<body>\n")
+            f.write(extracted_content)
+            f.write("\n</body>\n</html>")
+    else:
+        print("Specified div ID not found in the HTML.")
+
+
+def additional_function(div_ids):
+    for div_id in div_ids:
+        file_path = os.path.join('extracted_html', div_id + '.html')
+        try:
+            extract_schedule_data(file_path)
+        except Exception as e:
+            print(f"An error occurred while processing {file_path}: {e}")
+            break  # Stop the loop on error
+
+
+# Read the original HTML file
+with open('./getdata/original.html', 'r') as f:
+    html_content = f.read()
+
+soup = BeautifulSoup(html_content, "html.parser")
+
+# Find all the course title elements
+course_title_elements = soup.select(
+    "div[id^='win0divDERIVED_REGFRM1_DESCR20']")
+
+# Initialize an array to store course titles
+course_titles = []
+div_ids = []
+
+# Extract and store the course titles and div_ids in the arrays
+for title_element in course_title_elements:
+    course_title = title_element.find("td", class_="PAGROUPDIVIDER")
+    if course_title:
+        course_titles.append(course_title.get_text())
+        div_ids.append(title_element["id"])
+
+
+def create_button_with_function(title, div_id):
+    button = tk.Button(
+        root, text=title, command=lambda: searchforsubject(div_id))
+    button.pack()
+
+
+def format_time(time_str):
+    # Convert input time string to datetime object
+    time_obj = datetime.strptime(time_str, '%I:%M%p')
+
+    # Format the datetime object as desired
+    formatted_time = time_obj.strftime('%I:%M:%S %p')
+    return formatted_time
+
+
+def stuff2():
+    # Read JSON data from file
+
+    for item in div_ids:
+        with open('./extracted_html/' + item + '_schedule_data.json', 'r') as json_file:
+            json_data = json.load(json_file)
+
+        # Format the time fields in the JSON data
+        for entry in json_data:
+            entry["Start Time"] = format_time(entry["Start Time"])
+            entry["End Time"] = format_time(entry["End Time"])
+
+        # Specify the CSV file path
+        csv_file_path = item + "output.csv"
+
+        # Define the desired field order for CSV
+        field_order = ["Subject", "Start Date",
+                       "Start Time", "End Time", "Location"]
+
+        # Write JSON data to CSV
+        with open(csv_file_path, 'w', newline='') as csv_file:
+            fieldnames = json_data[0].keys()
+            writer = csv.DictWriter(csv_file, fieldnames=field_order)
+
+            writer.writeheader()
+            writer.writerows(json_data)
+
+
+# Create the main window
+root = tk.Tk()
+root.title("Buttons Based on Array Length")
+
+# Create a label
+label = tk.Label(
+    root, text="Click a button to extract the data from its table into another file ")
+label.pack(pady=10)
+
+# Create buttons with attached functions
+for i in range(len(course_titles)):
+    create_button_with_function(course_titles[i], div_ids[i])
+
+buttontwo = tk.Button(
+    root, text='Convert all to json', command=lambda: additional_function(div_ids))
+buttontwo.pack()
+
+buttonthree = tk.Button(
+    root, text='Convert Json to Excel', command=lambda: stuff2())
+buttonthree.pack()
+
+# Start the Tkinter event loop
+root.mainloop()
