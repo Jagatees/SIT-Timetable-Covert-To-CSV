@@ -1,6 +1,20 @@
 # SIT_TImetable_Extractor
 
-## Step-by-Step Visual Guide + Text Guide
+## Setup
+
+Ensure that you are using Python3.
+
+### Installing Modules
+
+Open Command Prompt (or Terminal if Linux), `cd` to the directory which this project is at.
+
+```
+pip install -r requirement.txt
+```
+
+It should install all the required external modules.<br>
+
+## Step-by-Step Visual Guide + Text Guide For Appllication
 
 Step 1:
 ![Step 1](./instruction_image/one.png)

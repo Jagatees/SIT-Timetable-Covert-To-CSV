@@ -5,6 +5,10 @@ import json
 import csv
 from datetime import datetime
 
+# PENDING
+# IOS Calender convertion
+# more user firendly
+
 
 def extract_schedule_data(html_file_name):
     # Read HTML content from a file
@@ -118,7 +122,7 @@ def additional_function(div_ids):
 
 
 # Read the original HTML file
-with open('./getdata/original.html', 'r') as f:
+with open('./Timtable_Extracter/getdata/original.html', 'r') as f:
     html_content = f.read()
 
 soup = BeautifulSoup(html_content, "html.parser")
