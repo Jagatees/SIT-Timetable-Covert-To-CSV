@@ -1,5 +1,7 @@
 # SIT_TImetable_Extractor
 
+## Step-by-Step Visual Guide + Text Guide
+
 Step 1:
 ![Step 1](./instruction_image/one.png)
 <br>
@@ -20,13 +22,13 @@ Step 5:
 ![Step 5](./instruction_image/five.png)
 <br>
 
-Step 6: Paste code into original.html and save
+## Step 6: Paste Code into "Original.html"
 
-Step 7: Execute the main.py Script
+## Step 2: Execute `main.py` Script
 
-Step 8: Follow Button Sequences
+## Step 3: Follow Button Sequences
 
-Step 9: Observe Generated CSV Files
+## Step 4: CSV File Generation
 
 # TO DO LIST
 
