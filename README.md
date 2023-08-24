@@ -1,11 +1,28 @@
 # SIT_TImetable_Extractor
 
-First 5 step
-![alt text](./instruction_image/one.png)
-![alt text](./instruction_image/two.png)
-![alt text](./instruction_image/three.png)
-![alt text](./instruction_image/four.png)
-![alt text](./instruction_image/five.png)
+## Step 1: Initial Setup
+
+Provide a brief description of the initial setup required for the project.
+
+## Step 2: Execute `main.py` Script
+
+Explain how to execute the `main.py` script to initiate the process.
+
+## Step 3: Follow Button Sequences
+
+Illustrate the buttons that need to be interacted with, explaining their purpose and sequence.
+
+## Step 4: CSV File Generation
+
+Clarify that the user should anticipate the creation of new CSV files resulting from their interactions.
+
+## Step-by-Step Visual Guide
+
+![Step 1](./instruction_image/one.png)
+![Step 2](./instruction_image/two.png)
+![Step 3](./instruction_image/three.png)
+![Step 4](./instruction_image/four.png)
+![Step 5](./instruction_image/five.png)
 
 Step 6: Paste code into original.html and save
 
