@@ -1,4 +1,4 @@
-# SIT_TImetable_Extractor
+# SIT_Timetable_Extractor
 
 ## Setup
 
