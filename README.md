@@ -38,9 +38,9 @@ Step 5:
 
 ## Step 6: Paste Element Code into "Original.html" in Timtable_Extracter Folder
 
-## Step 2: Execute `main.py` Script
+## Step 7: Execute `main.py` Script
 
-## Step 3: Chose Method 1 or Method 2 on GUI
+## Step 8: Chose Method 1 or Method 2 on GUI
 
 Method 1
 
@@ -51,7 +51,7 @@ Method 2
 
 Just click the button in the sequenece u see on the gui under method 2 and then move onto step 4
 
-## Step 4: OPEN ME Folder Created all your csv is inside there
+## Step 9: OPEN ME Folder Created all your csv is inside there
 
 # PENDING FEATUERS
 
