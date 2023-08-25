@@ -127,28 +127,6 @@ def additional_function(div_ids):
             break  # Stop the loop on error
 
 
-# Read the original HTML file
-with open('./Timtable_Extracter/getdata/original.html', 'r') as f:
-    html_content = f.read()
-
-soup = BeautifulSoup(html_content, "html.parser")
-
-# Find all the course title elements
-course_title_elements = soup.select(
-    "div[id^='win0divDERIVED_REGFRM1_DESCR20']")
-
-# Initialize an array to store course titles
-course_titles = []
-div_ids = []
-
-# Extract and store the course titles and div_ids in the arrays
-for title_element in course_title_elements:
-    course_title = title_element.find("td", class_="PAGROUPDIVIDER")
-    if course_title:
-        course_titles.append(course_title.get_text())
-        div_ids.append(title_element["id"])
-
-
 def create_button_with_function(title, div_id):
     print('div is : ' + div_id)
     button = tk.Button(
@@ -202,20 +180,6 @@ def generateICS():
     # convert the json to ics , might need to do some re arrange of data
 
 
-# Create the main window
-root = tk.Tk()
-root.title("Buttons Based on Array Length")
-
-# Create a label
-label = tk.Label(
-    root, text="Click a button to extract the data from its table into another file ")
-label.pack(pady=10)
-
-# # Create buttons with attached functions
-# for i in range(len(course_titles)):
-#     create_button_with_function(course_titles[i], div_ids[i])
-
-
 # Create a single button that generates JSON for all courses
 def generate_all_json():
     additional_function(div_ids)
@@ -226,6 +190,54 @@ def generate_all_html():
         searchforsubject(div_id)
 
 
+# Read the original HTML file
+with open('./Timtable_Extracter/getdata/original.html', 'r') as f:
+    html_content = f.read()
+
+soup = BeautifulSoup(html_content, "html.parser")
+
+# Find all the course title elements
+course_title_elements = soup.select(
+    "div[id^='win0divDERIVED_REGFRM1_DESCR20']")
+
+# Initialize an array to store course titles
+course_titles = []
+div_ids = []
+
+# Extract and store the course titles and div_ids in the arrays
+for title_element in course_title_elements:
+    course_title = title_element.find("td", class_="PAGROUPDIVIDER")
+    if course_title:
+        course_titles.append(course_title.get_text())
+        div_ids.append(title_element["id"])
+
+
+# Create the main window
+root = tk.Tk()
+root.title("Buttons Based on Array Length")
+
+
+label2 = tk.Label(
+    root, text="Method 1")
+label2.pack()
+
+# Create buttons with attached functions
+for i in range(len(course_titles)):
+    create_button_with_function(course_titles[i], div_ids[i])
+
+buttontwo = tk.Button(
+    root, text='Generate JSON', command=lambda: additional_function(div_ids))
+buttontwo.pack()
+
+buttonthree = tk.Button(
+    root, text='Generate .CSV for Google Calender', command=lambda: generateCSV())
+buttonthree.pack()
+
+
+label = tk.Label(
+    root, text="Methos 2")
+label.pack()
+
 generate_button = tk.Button(
     root, text="Generate HTML for All Courses", command=generate_all_html)
 generate_button.pack()
@@ -234,13 +246,10 @@ generate_button = tk.Button(
     root, text="Generate JSON for All Courses", command=generate_all_json)
 generate_button.pack()
 
-# buttontwo = tk.Button(
-#     root, text='Generate JSON', command=lambda: additional_function(div_ids))
-# buttontwo.pack()
-
 buttonthree = tk.Button(
     root, text='Generate .CSV for Google Calender', command=lambda: generateCSV())
 buttonthree.pack()
+
 
 # working on ICS Convertion
 # buttonfour = tk.Button(
