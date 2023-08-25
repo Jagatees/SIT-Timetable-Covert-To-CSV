@@ -1,4 +1,6 @@
-# SIT_Timetable_Covert_To_CSV
+# SIT_Timetable_Covert_To_CSV 
+[![Github All Releases](https://img.shields.io/github/downloads/Jagatees/SIT_Timetable_Covert_To_CSV/total.svg)]()
+
 
 ## Description
 
@@ -58,3 +60,4 @@ Just click the button in the sequence you see on the GUI under method 2 and then
 # Contact Me
 
 Email: jagatees.mac@gmail.com
+
