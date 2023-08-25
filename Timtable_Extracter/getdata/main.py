@@ -5,10 +5,6 @@ import json
 import csv
 from datetime import datetime
 
-# PENDING
-# IOS Calender convertion
-# more user firendly
-
 
 def extract_schedule_data(html_file_name):
     # Read HTML content from a file
@@ -39,13 +35,18 @@ def extract_schedule_data(html_file_name):
         days_times = days_times_div.get_text() if days_times_div else ""
 
         # Split "Days & Time" into separate fields for "Days" and "Time"
-        days, time = days_times.split(maxsplit=1) if days_times else ("", "")
+        days, time_range = days_times.split(
+            maxsplit=1) if days_times else ("", "")
+
+        # Split time range into "Start Time" and "End Time"
+        start_time, end_time = map(
+            str.strip, time_range.split('-')) if time_range else ("", "")
 
         # Remove first two characters from "Days" and "Time"
-        if len(days) > 2:
-            days = days[2:]
-        if len(time) > 2:
-            time = time[2:]
+        # if len(days) > 2:
+        #     days = days[2:]
+        # if len(time) > 2:
+        #     time = time[2:]
 
         # Find <div> with id "win0divMTG_LOC$.." to get Room
         room_div = row.find(
@@ -66,10 +67,13 @@ def extract_schedule_data(html_file_name):
         if start_end_dates:
             data["Start Date"] = start_end_dates
         # Store other data if any field is non-empty
+        # Store other data if any field is non-empty
         if days:
-            data["Start Time"] = days
-        if time:
-            data["End Time"] = time
+            data["Start Time"] = start_time
+            data["End Time"] = end_time
+        if room:
+            data["Location"] = room
+
         if room:
             data["Location"] = room
 
