@@ -55,11 +55,10 @@ Just click the button in the sequenece u see on the gui under method 2 and then 
 
 # PENDING FEATUERS
 
-- iOS calendar
-- text field for user to paste HTML
+- iOS calendar file format export for maunal use
+- use selium to login into website and extra the html block
+- auto go paste into google calender
 
 # Contact Me
 
-Telegram : @xpluse3k
-<br>
 Email : jagatees.mac@gmail.com
