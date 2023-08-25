@@ -177,8 +177,12 @@ def generateCSV():
             entry["Start Time"] = format_time(entry["Start Time"])
             entry["End Time"] = format_time(entry["End Time"])
 
-        # Specify the CSV file path
-        csv_file_path = item + "output.csv"
+        # Specify the CSV file path with the folder
+        folder_name = 'OPEN ME'  # Change this to your desired folder name
+        # Create the folder if it doesn't exist
+        os.makedirs(folder_name, exist_ok=True)
+
+        csv_file_path = os.path.join(folder_name, item + "output.csv")
 
         # Define the desired field order for CSV
         field_order = ["Subject", "Start Date",

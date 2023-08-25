@@ -40,9 +40,9 @@ Step 5:
 
 ## Step 2: Execute `main.py` Script
 
-## Step 3: Follow Button Sequences
+## Step 3: Click the button from top to bottom one by one
 
-## Step 4: CSV File Generation
+## Step 4: OPEN ME Folder Created all your csv is inside there
 
 # TO DO LIST
 
