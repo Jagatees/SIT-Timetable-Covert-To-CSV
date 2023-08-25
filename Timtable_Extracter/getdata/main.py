@@ -88,12 +88,14 @@ def extract_schedule_data(html_file_name):
             '.html', '_schedule_data.json')
         with open(output_file_name, 'w') as json_file:
             json.dump(schedule_data, json_file, indent=4)
-        print(f"Data has been saved to {output_file_name}")
+        # print(f"Data has been saved to {output_file_name}")
     else:
         print("No data to save.")
 
 
 def searchforsubject(div_id_to_extract):
+    print('div is : ' + div_id_to_extract + 'doing')
+
     target_div = soup.find('div', id=div_id_to_extract)
 
     if target_div:
@@ -121,7 +123,7 @@ def additional_function(div_ids):
         try:
             extract_schedule_data(file_path)
         except Exception as e:
-            print(f"An error occurred while processing {file_path}: {e}")
+            # print(f"An error occurred while processing {file_path}: {e}")
             break  # Stop the loop on error
 
 
@@ -148,6 +150,7 @@ for title_element in course_title_elements:
 
 
 def create_button_with_function(title, div_id):
+    print('div is : ' + div_id)
     button = tk.Button(
         root, text=title, command=lambda: searchforsubject(div_id))
     button.pack()
@@ -162,7 +165,7 @@ def format_time(time_str):
     return formatted_time
 
 
-def stuff2():
+def generateCSV():
     # Read JSON data from file
 
     for item in div_ids:
@@ -190,6 +193,11 @@ def stuff2():
             writer.writerows(json_data)
 
 
+def generateICS():
+    print('Apple Calender')
+    # convert the json to ics , might need to do some re arrange of data
+
+
 # Create the main window
 root = tk.Tk()
 root.title("Buttons Based on Array Length")
@@ -199,17 +207,41 @@ label = tk.Label(
     root, text="Click a button to extract the data from its table into another file ")
 label.pack(pady=10)
 
-# Create buttons with attached functions
-for i in range(len(course_titles)):
-    create_button_with_function(course_titles[i], div_ids[i])
+# # Create buttons with attached functions
+# for i in range(len(course_titles)):
+#     create_button_with_function(course_titles[i], div_ids[i])
 
-buttontwo = tk.Button(
-    root, text='Convert all to json', command=lambda: additional_function(div_ids))
-buttontwo.pack()
+
+# Create a single button that generates JSON for all courses
+def generate_all_json():
+    additional_function(div_ids)
+
+
+def generate_all_html():
+    for div_id in div_ids:
+        searchforsubject(div_id)
+
+
+generate_button = tk.Button(
+    root, text="Generate HTML for All Courses", command=generate_all_html)
+generate_button.pack()
+
+generate_button = tk.Button(
+    root, text="Generate JSON for All Courses", command=generate_all_json)
+generate_button.pack()
+
+# buttontwo = tk.Button(
+#     root, text='Generate JSON', command=lambda: additional_function(div_ids))
+# buttontwo.pack()
 
 buttonthree = tk.Button(
-    root, text='Convert Json to Excel', command=lambda: stuff2())
+    root, text='Generate .CSV for Google Calender', command=lambda: generateCSV())
 buttonthree.pack()
+
+# working on ICS Convertion
+# buttonfour = tk.Button(
+#     root, text='Generate .ICS for Apple Calender', command=lambda: generateICS(), )
+# buttonfour.pack()
 
 # Start the Tkinter event loop
 root.mainloop()
