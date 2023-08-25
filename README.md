@@ -57,3 +57,8 @@ Just click the button in the sequenece u see on the gui under method 2 and then 
 
 - iOS calendar
 - text field for user to paste HTML
+
+# Contact Me
+
+Telegram : @xpluse3k
+Email : jagatees.mac@gmail.com
