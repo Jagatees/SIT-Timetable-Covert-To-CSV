@@ -1,4 +1,4 @@
-# SIT_Timetable_Extractor
+# SIT_Timetable_Covert_To_CSV
 
 ## Description
 
