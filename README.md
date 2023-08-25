@@ -1,5 +1,9 @@
 # SIT_Timetable_Extractor
 
+## Description
+
+This application requires you to paste the HTML block from the In4sit website of your timetable. It will generate a CSV file for you to add to your Google Calendar on your own.
+
 ## Setup
 
 Ensure that you are using Python3.
@@ -36,29 +40,27 @@ Step 5:
 ![Step 5](./instruction_image/five.png)
 <br>
 
-## Step 6: Paste Element Code into "Original.html" in Timtable_Extracter Folder
+## Step 6: Paste the element code into "Original.html" in Timtable_Extracter Folder
 
 ## Step 7: Execute `main.py` Script
 
-## Step 8: Chose Method 1 or Method 2 on GUI
+## Step 8: Choose Method 1 or Method 2 on GUI
 
 Method 1
 
-All your module will be generate into sepcfic button now u click on which module u want to generate the HTML
-After click on the module u want , then u can click 'Generate JSON' button then the 'Generate .CSV for Google Calender' button
+All your modules will be generated into a specific button Now click on which module you want to generate the HTML
+After clicking on the module you want, then u can click the 'Generate JSON' button and then the 'Generate .CSV for Google Calender' button
 
 Method 2
 
-Just click the button in the sequenece u see on the gui under method 2 and then move onto step 4
+Just click the button in the sequence you see on the GUI under method 2 and then move on to step 4
 
-## Step 9: OPEN ME Folder Created all your csv is inside there
+## Step 9: OPEN ME Folder All your CSV is inside there
 
-# PENDING FEATUERS
+# PENDING FEATURES
 
-- iOS calendar file format export for maunal use
-- use selium to login into website and extra the html block
-- auto go paste into google calender
+- iOS calendar file format export for manual use
 
 # Contact Me
 
-Email : jagatees.mac@gmail.com
+Email: jagatees.mac@gmail.com
