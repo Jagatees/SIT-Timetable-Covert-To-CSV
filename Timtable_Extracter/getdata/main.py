@@ -191,7 +191,7 @@ def generate_all_html():
 
 
 # Read the original HTML file
-with open('./Timtable_Extracter/getdata/original.html', 'r') as f:
+with open('original.html', 'r') as f:
     html_content = f.read()
 
 soup = BeautifulSoup(html_content, "html.parser")
