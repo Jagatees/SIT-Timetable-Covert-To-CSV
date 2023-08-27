@@ -13,7 +13,7 @@ Ensure that you are using Python3.
 Open Command Prompt (or Terminal if Linux), `cd` to the directory in which this project is at.
 
 ```
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 <br>
