@@ -10,12 +10,6 @@ This application requires you to paste the HTML block from the In4sit website of
 
 Ensure that you are using Python3.
 
-Open Command Prompt (or Terminal if Linux), `cd` to the directory in which this project is at.
-
-```
-pip install -r requirements.txt
-```
-
 <br>
 
 ## Step-by-Step Guide
@@ -42,7 +36,11 @@ Step 5:
 
 ## Step 6: Paste the element code into "Original.html" in Timtable_Extracter Folder
 
-## Step 7: Execute `main.py` Script
+## Step 7 : Go into the Directory Where the main.py is 
+
+## Step 8: Open your terminal in this directory and run "pip install -r requirements.txt" 
+
+## Step 7: Execute `python3 main.py` , u will see a GUI Pop up
 
 ## Step 8: Choose Method 1 or Method 2 on GUI
 
@@ -55,7 +53,7 @@ Method 2
 
 Just click the button in the sequence you see on the GUI under method 2 and then move on to step 4
 
-## Step 9: OPEN ME Folder All your CSV is inside there
+## Step 9: A new folder will appear in the folder call "OPEN ME" all your csv file will be in there to upload to google calender manually 
 
 # Contact Me
 
