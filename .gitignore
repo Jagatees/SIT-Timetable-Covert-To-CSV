@@ -154,3 +154,4 @@ cython_debug/
 # folder
 *.csv
 extracted_html/
+instruction_image/SCR-20230828-bx1.png
