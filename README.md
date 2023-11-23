@@ -1,7 +1,8 @@
 # SIT_Timetable_Covert_To_CSV 
-[![Github All Releases](https://img.shields.io/github/downloads/Jagatees/SIT_Timetable_Covert_To_CSV/total.svg)]()
 
+[![Github All Releases](https://img.shields.io/github/downloads/Jagatees/SIT_Timetable_Covert_To_CSV/total.svg)](https://github.com/Jagatees/SIT_Timetable_Covert_To_CSV/releases)
 
+Click on the badge above to view the number of downloads.
 ## Description
 
 This application requires you to paste the HTML block from the In4sit website of your timetable. It will generate a CSV file for you to add to your Google Calendar on your own.
